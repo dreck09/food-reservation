@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<h1> hello fucking world </h1>
+
+    <h1>color red</h1>
+
+
 @endsection
