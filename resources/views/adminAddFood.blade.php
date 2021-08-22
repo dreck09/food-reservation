@@ -19,12 +19,12 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{{route('add.food')}}" method="post" enctype="multipart/form-data">
                 @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label for="foodTitle">Food Title</label>
-                            <input type="text" name="food_id" class="form-control" id="foodTitle" placeholder="Ex: Adobo">
+                            <input type="text" name="food_title" class="form-control" id="foodTitle" placeholder="Ex: Adobo">
                         
                         </div>
                         <div class="form-group">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label for="InputAuthor">Price</label>
-                            <input type="text" name="Price" class="form-control" id="InputPrice" placeholder="Enter Price">
+                            <input type="text" name="price" class="form-control" id="InputPrice" placeholder="Enter Price">
                             
                         </div>                        
                         <div class="form-group">
