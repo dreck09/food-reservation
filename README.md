@@ -61,3 +61,53 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Libarary Management System
+
+## Installation
+
+Before you use the food reservation system make sure that you install it in your computer.
+
+* First open your git bash and clone this reporsitory
+
+```bash
+git clone https://github.com/dreck09/food-reservation.git
+```
+
+* Second to change your working directory
+
+```bash
+cd food-reservation
+```
+
+* Third to install the laravel dependencies and libraries required
+
+```bash
+composer install
+```
+
+* Fourth to copy the environment file and change the values according to your development environment
+
+```bash
+cp .env.example .env
+```
+
+* To generate laravel key
+
+```bash
+php artisan key:generate
+```
+
+* To migrate and seed the database
+
+> Note! make it sure that you have already created a database before doing this and assign it to your .env file
+
+```bash
+php artisan migrate --seed
+```
+
+* Create the symbolic links configured for the application
+
+```bash
+php artisan storage:link
+```
