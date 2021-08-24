@@ -32,19 +32,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
-      </li>
-    </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -65,7 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
         </div>
         <div class="info">
-          <a href="#" class="d-block"></a>
+          <a href="#" class="d-block">J4s - ADMIN</a>
         </div>
       </div>
 
@@ -75,16 +62,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-          <a href="#ass="nav-link">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
-          <p>Dashboard</p> </a>
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Dashboard</p></a>
           </li>
           <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-plus"></i>
-            <p>Add Food</p> </a>
+            <a href="{{route('admin.foodmenu')}}" class="nav-link">
+            <i class="fas fa-drumstick-bite"></i>
+            <p>Food Menu</p></a>
           </li>
-         
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="fas fa-box-open"></i>
+            <p>Set Food Package</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="fas fa-hourglass-end"></i>
+            <p>Pending Transaction</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="fas fa-calendar-alt"></i>
+            <p>Schedule</p></a>
+          </li>
+          
           <hr>
           @guest @if (Route::has('login'))
           @endif @else
@@ -140,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    This is fucking footer
+    J4s - Online Catering Reservation System
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -164,6 +166,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+
+<script>
+  $(function () {
+    $("#food_item").DataTable({
+      "order":[[0,'desc']],
+      "responsive": true, 
+      "lengthChange": true, 
+      "autoWidth": false,
+      "lengthMenu":[[5,10,25,50,-1],[5,10,25,50,"All"]],
+    });
+  });
+</script>
+
+<script>
+$('#editFoodModal').on('show.bs.modal', function (e) {
+  var opener=e.relatedTarget;
+  
+  var foodID=$(opener).attr('id');
+  var foodTitle=$(opener).attr('food-title');
+  var description=$(opener).attr('description');
+  var price=$(opener).attr('price');
+  var categories=$(opener).attr('categories');
+
+  $('#editForm').find('[name="foodID"]').val(foodID);
+  $('#editForm').find('[name="food_title"]').val(foodTitle);
+  $('#editForm').find('[name="description"]').val(description);
+  $('#editForm').find('[name="price"]').val(price);
+  $('#editForm').find('[name="categories"]').val(categories);
+});
+</script>
 
 </body>
 </html>
