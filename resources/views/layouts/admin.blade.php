@@ -197,5 +197,25 @@ $('#editFoodModal').on('show.bs.modal', function (e) {
 });
 </script>
 
+<script>
+$('#showFoodModal').on('show.bs.modal', function (e) {
+  var opener=e.relatedTarget;
+  var foodID=$(opener).attr('id');
+  var foodTitle=$(opener).attr('food-title');
+  var description=$(opener).attr('description');
+  var price=$(opener).attr('price');
+  var categories=$(opener).attr('categories');
+  var imgsrc=$(opener).attr('image');
+
+  $('#showForm').find('[name="foodID"]').val(foodID);
+  $('#showForm').find('[name="food_title"]').val(foodTitle);
+  $('#showForm').find('[name="description"]').val(description);
+  $('#showForm').find('[name="price"]').val(price+' pesos');
+  $('#showForm').find('[name="categories"]').val(categories);
+  $('#image').attr('src',imgsrc);
+});
+</script>
+
+
 </body>
 </html>

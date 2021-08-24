@@ -46,10 +46,24 @@
                     <td>{{$data->description}}</td>
                     <td>{{$data->price}}</td>
                     <td>{{$data->categories}}</td>
-                    <td><img src="/storage/foods_image/{{$data->image}}" width="100" hight="100" class="img-circle elevation-2"></td>
+                    <td><img src="/storage/foods_image/{{$data->image}}" width="100" hight="100" class="img-circle"></td>
                     <td>
                     <form action="" method="post">
                     @csrf
+                        <a class="btn btn-primary m-1 .btn-sm"
+                            type="button" 
+                            id="{{$data->id}}" 
+                            food-title="{{$data->food_title}}" 
+                            description="{{$data->description}}" 
+                            price="{{$data->price}}" 
+                            categories="{{$data->categories}}" 
+                            image="/storage/foods_image/{{$data->image}}" 
+                            class="btn btn-primary" 
+                            data-toggle="modal" 
+                            data-target="#showFoodModal">
+                            Show
+                            <i class="fas fa-eye"></i>
+                        </a>
                         <button type="submit" class="btn btn-danger m-1 .btn-sm">
                             Delete
                             <i class="fas fa-trash"></i>
@@ -60,14 +74,14 @@
                             food-title="{{$data->food_title}}" 
                             description="{{$data->description}}" 
                             price="{{$data->price}}" 
-                            categories="{{$data->categories}}" 
+                            categories="{{$data->categories}}"
+                            image="{{$data->image}}"
                             class="btn btn-primary" 
                             data-toggle="modal" 
                             data-target="#editFoodModal">
                             Edit
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-                   
                     </form>
                     </td>
                 </tr>
@@ -113,7 +127,7 @@
                             <select name="categories" id="InputCategories" class="form-control">
                                 <option value="Beverage">Beverage</option>
                                 <option value="Desert">Desert</option>
-                                <option value="MainDish">Main Dish</option>
+                                <option value="Main Dish">Main Dish</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -168,7 +182,7 @@
                             <select name="categories" id="UpdateCategories" class="form-control">
                                 <option value="Beverage">Beverage</option>
                                 <option value="Desert">Desert</option>
-                                <option value="MainDish">Main Dish</option>
+                                <option value="Main Dish">Main Dish</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -186,6 +200,40 @@
                         <button type="submit" class="btn btn-success float-right">Update</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal SHOW FOOD -->
+<div class="modal fade" id="showFoodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-information">
+            <h5 class="modal-title" id="exampleModalLabel">Food Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="container p-3">
+                    <form id="showForm">
+                        <div class="d-flex justify-content-center">
+                            <img id="image" width="300" class="img-circle elevation-5" />
+                        </div>
+                        <div class="mt-2 p-2 d-flex justify-content-center">
+                            <h5><input type="text" class="border text-center border-white" enable="false" name="food_title" readonly></h5>
+                        </div>
+                        <div class="form-group">
+                            <label>Price : 
+                            <input type="text" class="border border-white" enable="false" name="price" readonly>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea type="text" class="form-control border border-white" enable="false" name="description" readonly></textarea>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
