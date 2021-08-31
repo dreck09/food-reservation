@@ -16,4 +16,14 @@ class Food extends Model
         'categories',
         'image',
     ];
+
+    public function assign_food_package()
+    {
+        return $this->hasMany(AssignFoodPackage::class);
+    }
+
+    public function food_package()
+    {
+        return $this->belongsTo(FoodPackage::class);
+    }
 }
