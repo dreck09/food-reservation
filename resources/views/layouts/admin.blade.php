@@ -11,6 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!--@yield('title')-->
   <title>Admin Dashboard</title>
 
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -185,6 +186,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
   $(function () {
@@ -235,6 +237,11 @@ $('#showFoodModal').on('show.bs.modal', function (e) {
 });
 </script>
 
+<script>
+ $(".js-select-multiple").select2({
+  theme: "classic"
+});
+</script>
 
 </body>
 </html>
