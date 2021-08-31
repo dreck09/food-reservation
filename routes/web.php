@@ -23,6 +23,9 @@ Route::get('logout', [LoginController::class,'logout']);
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::view('/admin', 'admin');
     Route::prefix('admin')->group(function(){
+        Route::get('/food/package', function () {
+            return view('admin-add-food-package');
+        });
         Route::get('list/food', [FoodController::class, 'index'])->name('admin.foodmenu');
         Route::post('add/food', [FoodController::class, 'store'])->name('add.food');
         Route::post('delete/food/{id}', [FoodController::class, 'destroy'])->name('del.food');
