@@ -45,7 +45,7 @@ class FoodController extends Controller
 
     public function show($id)
     {
-        //
+    
     }
 
     public function update(Request $request)
@@ -79,6 +79,9 @@ class FoodController extends Controller
 
     public function destroy($id)
     {
-        //
+        $foods = Food::findorfail($id);
+        $foods->delete();
+        return back()->with('message', 'Successfully deleted!');
+       
     }
 }

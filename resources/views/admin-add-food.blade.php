@@ -48,8 +48,9 @@
                     <td>{{$data->categories}}</td>
                     <td><img src="/storage/foods_image/{{$data->image}}" width="100" hight="100" class="img-circle"></td>
                     <td>
-                    <form action="" method="post">
+                    <form action="{{route('delete.food', $data->id)}}" method="post">
                     @csrf
+                    @method('DELETE')
                         <a class="btn btn-primary m-1 .btn-sm"
                             type="button" 
                             id="{{$data->id}}" 
@@ -63,7 +64,7 @@
                             data-target="#showFoodModal">
                             Show
                             <i class="fas fa-eye"></i>
-                        </a>
+                        </a> 
                         <button type="submit" class="btn btn-danger m-1 .btn-sm">
                             Delete
                             <i class="fas fa-trash"></i>
