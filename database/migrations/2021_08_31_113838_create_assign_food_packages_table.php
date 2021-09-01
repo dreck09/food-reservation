@@ -17,7 +17,7 @@ class CreateAssignFoodPackagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('food_id');
             $table->unsignedBigInteger('package_id');
-            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
+            $table->foreign('food_id')->references('id')->on('food')->onDelete('cascade');
             $table->foreign('package_id')->references('id')->on('food_packages')->onDelete('cascade');
             $table->timestamps();
         });
