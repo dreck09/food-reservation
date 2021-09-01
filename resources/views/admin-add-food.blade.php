@@ -218,21 +218,25 @@
             <div class="modal-body">
                 <div class="container p-3">
                     <form id="showForm">
+                        
                         <div class="d-flex justify-content-center">
                             <img id="image" width="300" class="img-circle elevation-5" />
                         </div>
+
                         <div class="mt-2 p-2 d-flex justify-content-center">
-                            <h5><input type="text" class="border text-center border-white" enable="false" name="food_title" readonly></h5>
+                            <h3 id="food_title"></h3>
                         </div>
-                        <div class="form-group">
-                            <label>Price : 
-                            <input type="text" class="border border-white" enable="false" name="price" readonly>
-                            </label>
+
+                        <div class="d-flex flex-row">
+                            <div class="p-2"><label>Price :</label></div>
+                            <div class="p-2"><p id="price"></p></div>
                         </div>
-                        <div class="form-group">
+
+                        <div class="d-flex flex-column">
                             <label>Description</label>
-                            <textarea type="text" class="form-control border border-white" enable="false" name="description" readonly></textarea>
+                            <p id="description"></p>
                         </div>
+
                     </form>
                 </div>
             </div>

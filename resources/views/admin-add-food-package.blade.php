@@ -183,16 +183,16 @@
                             <label for="InputAuthor">Price</label>
                             <input type="number" name="price" class="form-control" id="InputPrice" placeholder="Enter Price" required="">
                         </div> 
-
+                        
                         <div class="form-group">
                             <label for="foodTitle">Select Food :</label>
-                            <select style="width:100%" class="js-select-multiple form-control" name="food[]" wi multiple="multiple">
-                                <option value="#">Adobo</option>
-                                <option value="#">Ginataan</option>
-                                <option value="#">Lechon</option>
+                            <select style="width:100%" class="js-select-multiple form-control" name="food[]" multiple="multiple" required="">
+                            @foreach($foods as $data)
+                                <option value="{{$data->id}}">{{$data->food_title}}</option>
+                            @endforeach
                             </select>
                         </div> 
-                        
+                       
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -233,10 +233,10 @@
                         
                         <div class="form-group">
                             <label for="foodTitle">Select Food :</label>
-                            <select style="width:100%" class="js-select-multiple form-control" name="food[]" wi multiple="multiple">
-                                <option value="#">Adobo</option>
-                                <option value="#">Ginataan</option>
-                                <option value="#">Lechon</option>
+                            <select style="width:100%" class="js-select-multiple form-control" name="food[]" multiple="multiple" required="">
+                            @foreach($foods as $data)
+                                <option value="{{$data->id}}">{{$data->food_title}}</option>
+                            @endforeach
                             </select>
                         </div> 
                         
