@@ -92,19 +92,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <p>Food Menu</p></a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a href="{{route('admin.foodpackage')}}" class="nav-link">
+=======
+            <a href="{{route('admin.selectionfood')}}" class="nav-link">
+>>>>>>> 17e7f8085e335e28355a685dbb1c87a0775b2bcb
             <i class="fas fa-box-open"></i>
             <p>Set Food Package</p></a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-            <i class="fas fa-hourglass-end"></i>
-            <p>Pending Transaction</p></a>
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+              Transaction
+              <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="fas fa-hourglass-end ml-3"></i>
+                <p>Pending</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="fas fa-history ml-3"></i>
+                <p>In Proccess</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="fas fa-calendar-check ml-3"></i>
+                <p>Completed</p></a>
+              </li>
+            </ul>
           </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link">
             <i class="fas fa-calendar-alt"></i>
-            <p>Schedule</p></a>
+            <p>Schedule Event</p></a>
           </li>
           
           <hr>
@@ -229,11 +255,13 @@ $('#showFoodModal').on('show.bs.modal', function (e) {
   var imgsrc=$(opener).attr('image');
 
   $('#showForm').find('[name="foodID"]').val(foodID);
-  $('#showForm').find('[name="food_title"]').val(foodTitle);
   $('#showForm').find('[name="description"]').val(description);
-  $('#showForm').find('[name="price"]').val(price+' pesos');
   $('#showForm').find('[name="categories"]').val(categories);
   $('#image').attr('src',imgsrc);
+  document.getElementById("food_title").innerHTML = foodTitle;
+  document.getElementById("price").innerHTML = price+' pesos';
+  document.getElementById("description").innerHTML =description;
+
 });
 </script>
 

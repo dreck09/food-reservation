@@ -82,6 +82,11 @@ class FoodController extends Controller
         $foods = Food::findorfail($id);
         $foods->delete();
         return back()->with('message', 'Successfully deleted!');
-       
     }
+
+    public function getSelectionFood() {
+        $foods = Food::get();
+        return view('admin-add-food-package',compact('foods'));
+    }
+
 }
