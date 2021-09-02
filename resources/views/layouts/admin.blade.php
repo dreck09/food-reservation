@@ -92,11 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <p>Food Menu</p></a>
           </li>
           <li class="nav-item">
-<<<<<<< HEAD
             <a href="{{route('admin.foodpackage')}}" class="nav-link">
-=======
-            <a href="{{route('admin.selectionfood')}}" class="nav-link">
->>>>>>> 17e7f8085e335e28355a685dbb1c87a0775b2bcb
             <i class="fas fa-box-open"></i>
             <p>Set Food Package</p></a>
           </li>

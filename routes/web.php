@@ -26,17 +26,12 @@ Route::get('logout', [LoginController::class,'logout']);
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::view('/admin', 'admin');
     Route::prefix('admin')->group(function(){
-<<<<<<< HEAD
-
         // food package
         Route::get('list/package', [FoodPackageController::class, 'index'])->name('admin.foodpackage');
         Route::post('add/package', [FoodPackageController::class, 'store'])->name('add.foodpackage');
         Route::put('update/package', [FoodPackageController::class, 'update'])->name('update.foodpackage');
         Route::delete('list/package/{id}', [FoodPackageController::class, 'destroy'])->name('delete.foodpackage');
         // foods
-=======
-        Route::get('/food/package', [FoodController::class, 'getSelectionFood'])->name('admin.selectionfood');
->>>>>>> 17e7f8085e335e28355a685dbb1c87a0775b2bcb
         Route::get('list/food', [FoodController::class, 'index'])->name('admin.foodmenu');
         Route::post('add/food', [FoodController::class, 'store'])->name('add.food');
         Route::delete('list/food/{id}', [FoodController::class, 'destroy'])->name('delete.food');

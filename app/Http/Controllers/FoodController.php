@@ -84,9 +84,4 @@ class FoodController extends Controller
         return back()->with('message', 'Successfully deleted!');
     }
 
-    public function getSelectionFood() {
-        $foods = Food::get();
-        return view('admin-add-food-package',compact('foods'));
-    }
-
 }

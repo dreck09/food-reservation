@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Food;
 use App\Models\FoodPackage;
 use Illuminate\Http\Request;
 
@@ -14,8 +14,9 @@ class FoodPackageController extends Controller
      */
     public function index()
     {
+        $foods = Food::get();
         $package = FoodPackage::get();
-        return view('admin-add-food-package',compact('package'));
+        return view('admin-add-food-package',compact('package','foods'));
         // return view('admin-add-food-package');
     }
 
