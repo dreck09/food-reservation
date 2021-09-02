@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\FoodPackageController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Models\Food;
+use App\Models\FoodPackage;
 
 Route::get('/', function () {
     return view('homepage');
@@ -24,9 +26,13 @@ Route::get('logout', [LoginController::class,'logout']);
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::view('/admin', 'admin');
     Route::prefix('admin')->group(function(){
-        Route::get('/food/package', function () {
-            return view('admin-add-food-package');
-        });
+
+        // food package
+        Route::get('list/package', [FoodPackageController::class, 'index'])->name('admin.foodpackage');
+        Route::post('add/package', [FoodPackageController::class, 'store'])->name('add.foodpackage');
+        Route::put('update/package', [FoodPackageController::class, 'update'])->name('update.foodpackage');
+        Route::delete('list/package/{id}', [FoodPackageController::class, 'destroy'])->name('delete.foodpackage');
+        // foods
         Route::get('list/food', [FoodController::class, 'index'])->name('admin.foodmenu');
         Route::post('add/food', [FoodController::class, 'store'])->name('add.food');
         Route::delete('list/food/{id}', [FoodController::class, 'destroy'])->name('delete.food');
