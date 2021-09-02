@@ -3,93 +3,78 @@
 namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Models\FoodPackage;
+use App\Models\AssignFoodPackage;
 use Illuminate\Http\Request;
 
 class FoodPackageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $foods = Food::get();
         $package = FoodPackage::get();
-        return view('admin-add-food-package',compact('package','foods'));
-        // return view('admin-add-food-package');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+        $package->map(function ($item){
+            $assign_food_package = $item->assign_food_package;
+            $assign_food_package->map(function ($listFood){
+                $item_food_name = Food::findorfail($listFood->food_id);
+                $listFood->food_title = $item_food_name->food_title;
+            });
+        });
+        // return $package;
+        // foreach($package as $data){
+        //     foreach($data->assign_food_package as $subdata){
+        //         dd($subdata);
+        //     }
+        // }
         
+        return view('admin-add-food-package',compact('package','foods'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        $validated = $request->all();
         $package = FoodPackage::create([
             'package_name'=>$request->package_name,
             'price'=>$request->price,
         ]);
+
+        if(count($validated['food'])>0){
+            foreach($validated['food'] as $food_id){
+                $food_data = Food::findOrFail($food_id);
+                $assignedFood = AssignFoodPackage::create([
+                    'food_package_id' => $package->id,
+                    'food_id'=>$food_data->id,
+                ]);
+                // dd($assignedFood->food_package_id);
+            }
+        }
         return back()->with('message', 'Successfully Added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update(Request $request)
     {
-        //
-    }
+        $validated = $request->all();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+        $del_pkg = AssignFoodPackage::where("food_package_id",$request->packageID)->delete();
+        
         $packages = FoodPackage::findorFail($request->packageID);
         $packages->package_name = $request->package_name;
         $packages->price = $request->price;
-
+        
         $packages->update();
+
+        if(count($validated['food'])>0){
+            foreach($validated['food'] as $food_id){
+                $food_data = Food::findOrFail($food_id);
+                $assignedFood = AssignFoodPackage::create([
+                    'food_package_id' => $packages->id,
+                    'food_id'=>$food_data->id,
+                ]);
+            }
+        }
         return back()->with('message', 'Successfully Updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $packages = FoodPackage::findorfail($id);

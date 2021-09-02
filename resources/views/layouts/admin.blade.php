@@ -267,5 +267,20 @@ $('#showFoodModal').on('show.bs.modal', function (e) {
 });
 </script>
 
+<script>
+$('#editFoodPackageModal').on('show.bs.modal', function (e) {
+  var opener=e.relatedTarget;
+  
+  var packageID=$(opener).attr('id');
+  var package_name=$(opener).attr('package-name');
+  var price=$(opener).attr('price');
+
+  $('#editForm').find('[name="packageID"]').val(packageID);
+  $('#editForm').find('[name="package_name"]').val(package_name);
+  $('#editForm').find('[name="price"]').val(price);
+
+});
+</script>
+
 </body>
 </html>

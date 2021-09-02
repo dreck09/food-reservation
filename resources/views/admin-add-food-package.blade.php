@@ -29,26 +29,30 @@
                     <h3 class="card-title">{{$pkg->package_name . " - " . $pkg->price}} pesos</h3>
                     <div class="card-tools">
                     
-                
+                        <form action="{{route('delete.foodpackage', $pkg->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
 
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize">
-                        <i class="fas fa-expand"></i>
-                    </button>
-                
-                    <button type="button" 
-                            class="btn btn-tool" 
-                            data-toggle="modal" 
-                            data-target="#editFoodPackageModal">
-                        <i class="fas fa-pencil-alt"></i>
-                    </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        
+                            <button type="button" 
+                                    class="btn btn-tool"
+                                    id = "{{$pkg->id}}" 
+                                    package-name = "{{$pkg->package_name}}" 
+                                    price = "{{$pkg->price}}"
+                                    data-toggle="modal" 
+                                    data-target="#editFoodPackageModal">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            
+                            <button type="submit" class="btn btn-tool">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            
+                        </form>
 
-                    <form action="{{route('delete.foodpackage', $pkg->id)}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    </form>
                     </div>
                     <!-- /.card-tools -->
                 </div>
@@ -56,15 +60,11 @@
                 <div class="card-body" style="display: block;">
                     <table class="table table-striped table-bordered">
                         <tbody>
+                        @foreach($pkg->assign_food_package as $sub_data)
                             <tr>
-                                <td>Adobong Baboy</td>
+                                <td>{{$sub_data->food_title}}</td>
                             </tr> 
-                            <tr>
-                                <td>Ginataang Manok</td>
-                            </tr> 
-                            <tr>
-                                <td>Coke 1.5L</td>
-                            </tr> 
+                        @endforeach
                         </tbody>
                     </table> 
                 </div>
@@ -123,7 +123,7 @@
     </div>
 </div>
 
-<!-- Modal EDIT FOOD -->
+<!-- Modal EDIT FOOD PACKAGE -->
 <div class="modal fade" id="editFoodPackageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
