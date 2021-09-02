@@ -22,24 +22,33 @@
         </button>
 
         <div class="row">
+            @foreach ($package as $pkg)
             <div class="col-md-4">
                 <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Package 1 - 400 pesos</h3>
+                    <h3 class="card-title">{{$pkg->package_name . " - " . $pkg->price}} pesos</h3>
                     <div class="card-tools">
                     
+                
+
                     <button type="button" class="btn btn-tool" data-card-widget="maximize">
                         <i class="fas fa-expand"></i>
                     </button>
+                
                     <button type="button" 
                             class="btn btn-tool" 
                             data-toggle="modal" 
                             data-target="#editFoodPackageModal">
                         <i class="fas fa-pencil-alt"></i>
                     </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+
+                    <form action="{{route('delete.foodpackage', $pkg->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-tool" data-card-widget="remove">
                         <i class="fas fa-trash"></i>
                     </button>
+                    </form>
                     </div>
                     <!-- /.card-tools -->
                 </div>
@@ -62,99 +71,9 @@
                 <!-- /.card-body -->
                 </div>
             </div> 
-
+            @endforeach
             <!-- ------------------------------- -->
-            <div class="col-md-4">
-                <div class="card card-success">
-                <div class="card-header">
-                    <h3 class="card-title">Package 2 - 800 pesos</h3>
-                    <div class="card-tools">
-                    
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize">
-                        <i class="fas fa-expand"></i>
-                    </button>
-                    <button type="button" 
-                            class="btn btn-tool" 
-                            data-toggle="modal" 
-                            data-target="#editFoodPackageModal">
-                        <i class="fas fa-pencil-alt"></i>
-                    </button>
-                    <button type="submit" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    </div>
-                    <!-- /.card-tools -->
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body" style="display: block;">
-                    <table class="table table-striped table-bordered">
-                        <tbody>
-                            <tr>
-                                <td>Cake Chocolate</td>
-                            </tr> 
-                            <tr>
-                                <td>Dinakdakan</td>
-                            </tr> 
-                            <tr>
-                                <td>Unli Rice</td>
-                            </tr>
-                            <tr>
-                                <td>Coke 2L</td>
-                            </tr>  
-                        </tbody>
-                    </table> 
-                </div>
-                <!-- /.card-body -->
-                </div>
-            </div> 
-
-            <!-- ------------------------------- -->
-            <div class="col-md-4">
-                <div class="card card-success">
-                <div class="card-header">
-                    <h3 class="card-title">Package 3 - 1000 pesos</h3>
-                    <div class="card-tools">
-                    
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize">
-                        <i class="fas fa-expand"></i>
-                    </button>
-                    <button type="button" 
-                            class="btn btn-tool" 
-                            data-toggle="modal" 
-                            data-target="#editFoodPackageModal">
-                        <i class="fas fa-pencil-alt"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    </div>
-                    <!-- /.card-tools -->
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body" style="display: block;">
-                    <table class="table table-striped table-bordered">
-                        <tbody>
-                            <tr>
-                                <td>Lechon Kawali</td>
-                            </tr> 
-                            <tr>
-                                <td>Adobong Baboy</td>
-                            </tr> 
-                            <tr>
-                                <td>Adobong Manok</td>
-                            </tr>
-                            <tr>
-                        </tbody>
-                    </table> 
-                </div>
-                <!-- /.card-body -->
-                </div>
-            </div> 
-            
-            
         </div>   
-        
-
     </div>
   </div>
 </div>
@@ -170,13 +89,13 @@
             </button>
             </div>
             <div class="modal-body">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{{route('add.foodpackage')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
 
                         <div class="form-group">
                             <label for="food_package">Food Package Title</label>
-                            <input type="text" name="food_package" class="form-control" id="foodPackage" placeholder="Ex: Package 1 , 2, 3 etc." required="">
+                            <input type="text" name="package_name" class="form-control" id="foodPackage" placeholder="Ex: Package 1 , 2, 3 etc." required="">
                         </div>
                         
                         <div class="form-group">
@@ -215,15 +134,14 @@
             </button>
             </div>
             <div class="modal-body">
-                <form action="#" method="post" id="editForm" enctype="multipart/form-data">
+                <form action="{{route('update.foodpackage')}}" method="post" id="editForm" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                     <div class="card-body">
-
-                        <input hidden="" name="foodID" id="food_id">
+                        <input hidden="" name="packageID" id="package_id">
                         <div class="form-group">
                             <label for="UpadateFoodPackage">Food Package Title</label>
-                            <input type="text" name="food_title" class="form-control" id="UpadateFoodPackage" placeholder="Ex: Package 1 , 2, 3 etc." required="">
+                            <input type="text" name="package_name" class="form-control" id="UpadateFoodPackage" placeholder="Ex: Package 1 , 2, 3 etc." required="">
                         </div>
                         
                         <div class="form-group">
