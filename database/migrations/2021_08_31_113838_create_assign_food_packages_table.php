@@ -16,9 +16,9 @@ class CreateAssignFoodPackagesTable extends Migration
         Schema::create('assign_food_packages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('food_id');
-            $table->unsignedBigInteger('package_id');
+            $table->unsignedBigInteger('food_package_id');
             $table->foreign('food_id')->references('id')->on('food')->onDelete('cascade');
-            $table->foreign('package_id')->references('id')->on('food_packages')->onDelete('cascade');
+            $table->foreign('food_package_id')->references('id')->on('food_packages')->onDelete('cascade');
             $table->timestamps();
         });
     }

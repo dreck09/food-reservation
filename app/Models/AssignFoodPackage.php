@@ -10,7 +10,7 @@ class AssignFoodPackage extends Model
     use HasFactory;
 
     protected $fillable=[
-        'package_id',
+        'food_package_id',
         'food_id',
     ];
 
