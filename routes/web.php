@@ -28,7 +28,7 @@ Route::post('/register/admin', [RegisterController::class,'createAdmin']);
 Route::get('logout', [LoginController::class,'logout']);
 
 Route::group(['middleware' => 'auth:admin'], function () {
-    Route::view('/admin', 'admin');
+    Route::view('/admin', 'admin-dashboard')->name('admin.dashboard');
     Route::prefix('admin')->group(function(){
         // food package
         Route::get('list/package', [FoodPackageController::class, 'index'])->name('admin.foodpackage');
@@ -40,5 +40,15 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::post('add/food', [FoodController::class, 'store'])->name('add.food');
         Route::delete('list/food/{id}', [FoodController::class, 'destroy'])->name('delete.food');
         Route::put('update/food', [FoodController::class, 'update'])->name('update.food');
+        //trasaction
+        Route::get('pending/transaction/list', function(){
+            return view('admin-pending-transaction');
+        })->name('pending.transaction');
+        Route::get('inprocess/transaction/list', function(){
+            return view('admin-inprocess-transaction');
+        })->name('inprocess.transaction');
+        Route::get('completed/transaction/list', function(){
+            return view('admin-completed-transaction');
+        })->name('completed.transaction');
     });
 });
