@@ -1,3 +1,114 @@
-h1 {
-    color: red;
+.navbar {
+    background: cadetblue;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn-primary:hover {
+    color: black;
+    background-color: white;
+    border-color: cadetblue;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.about .about-left {
+    padding: 100px;
+    background-color: #fbe8ff;
+}
+
+.about .about-left h2 {
+    text-align: center;
+}
+
+.about .about-right {
+    background-image: url("../images/food1.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.contact-left {
+    background-image: url("../images/food2.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.contact-right {
+    padding: 90px;
+    background-color: #fbe8ff;
+}
+
+.contact-right h2 {
+    text-align: center;
+}
+
+.services-right {
+    background-image: url("../images/food3.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.services-left {
+    padding: 100px;
+    background-color: #fbe8ff;
+}
+
+.services-left input {
+    background-color: cadetblue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+.services-left input:hover {
+    background-color: white;
+    border: none;
+    border: 1px solid cadetblue;
+    color: cadetblue;
+    padding: 10px 20px;
+}
+
+.products {
+    background-color: #fbe8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.products h2 {
+    text-align: center;
+}
+
+.products .card-holder {
+    padding: 20px;
+}
+
+footer {
+    background-color: cadetblue;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+footer {
+    color: white;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer ul li a {
+    color: white;
 }

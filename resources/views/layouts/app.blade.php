@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -46,19 +46,23 @@
                             <a href="/" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/" class="nav-link">About Us</a>
+                            <a href="#about" class="nav-link">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/" class="nav-link">Contact Us</a>
+                            <a href="#contact" class="nav-link">Contact Us</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/" class="nav-link">Services</a>
+                            <a href="#services" class="nav-link">Services</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#services" class="nav-link">Products</a>
+                        </li>
+                      
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="btn btn-success" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
@@ -91,7 +95,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

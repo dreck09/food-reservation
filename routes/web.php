@@ -14,6 +14,10 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/transaction', function () {
+    return view('transaction');
+});
+
 
 Auth::routes();
 
