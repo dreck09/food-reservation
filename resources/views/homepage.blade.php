@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -116,4 +117,6 @@
     </ul> -->
     All Right Reserve 2021
 </footer>
+
 @endsection
+

@@ -112,3 +112,151 @@ footer ul {
 footer ul li a {
     color: white;
 }
+
+.transaction-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transaction-container input {
+    width: 100%;
+    margin: 2px;
+}
+
+.transaction-container input.special {
+    width: 100%;
+    margin: 2px;
+    background-color: cadetblue;
+    color: white;
+    border: 1px solid white;
+}
+
+.transaction-container input.special:hover {
+    width: 100%;
+    margin: 2px;
+    background-color: white;
+    color: cadetblue;
+    border: 1px solid cadetblue;
+}
+
+.transaction-left {
+    width: 100%;
+}
+
+.transaction-left .gcash-container {
+    margin: 2px;
+    border: 1px solid cadetblue;
+    padding: 20px;
+}
+
+.transaction-left .contact-us {
+    margin: 2px;
+    border: 1px solid cadetblue;
+    padding: 20px;
+}
+
+.package-container {
+    display: flex;
+}
+
+.course-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-menu .course-mune-inner {
+    display: flex;
+    align-items: center;
+}
+
+.course-mune-inner {
+    box-shadow: 4px 4px 2px 2px cadetblue;
+    border: 1px solid cadetblue;
+    padding: 5px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.course-menu img {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    margin-left: 10px;
+    border: 2px solid cadetblue;
+}
+
+.form-container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ;
+}
+
+.form-container input,
+select {
+    width: 100%;
+    border: 1px solid cadetblue;
+    padding: 0px;
+    height: 30px
+}
+
+.form-container .select {
+    width: 20%;
+    /* border-left: none !important; */
+    height: 30px;
+    padding: 0px;
+    margin: 0;
+    border: 1px solid cadetblue;
+}
+
+.form-container .input {
+    width: 78%;
+    /* border-right: none !important; */
+    padding: 0;
+    margin: 0;
+    height: 30px;
+    border: 1px solid cadetblue;
+}
+
+.outer-form-container {
+    width: 100%;
+}
+
+.package-card {
+    height: 200px;
+    box-shadow: 4px 4px 1px 1px cadetblue;
+    border: 1px solid cadetblue;
+    padding: 20px;
+    margin: 20px;
+}
+
+.package-card .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-container input {
+    margin: 2px;
+    background-color: cadetblue;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid white;
+}
+
+.button-container input:hover {
+    margin: 2px;
+    background-color: white;
+    color: cadetblue;
+    border: 1px solid cadetblue;
+}

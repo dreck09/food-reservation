@@ -12,6 +12,12 @@ use App\Models\FoodPackage;
 Route::get('/', function () {
     return view('homepage');
 });
+Route::get('/reservation', function () {
+    return view('reservation');
+});
+Route::get('/transaction', function () {
+    return view('transaction');
+});
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home/transaction', function () {
