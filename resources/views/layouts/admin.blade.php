@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('admin.dashboard')}}" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Dashboard</p></a>
           </li>
@@ -106,17 +106,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('pending.transaction')}}" class="nav-link">
                 <i class="fas fa-hourglass-end ml-3"></i>
                 <p>Pending</p></a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('inprocess.transaction')}}" class="nav-link">
                 <i class="fas fa-history ml-3"></i>
-                <p>In Proccess</p></a>
+                <p>In Process</p></a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('completed.transaction')}}" class="nav-link">
                 <i class="fas fa-calendar-check ml-3"></i>
                 <p>Completed</p></a>
               </li>
