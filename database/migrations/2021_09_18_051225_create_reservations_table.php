@@ -19,7 +19,7 @@ class CreateReservationsTable extends Migration
             $table->string('guests_no');
             $table->dateTime('r_date');
             $table->string('r_type');
-            $table->string('special_req');
+            $table->string('special_req')->nullable();
             $table->timestamps();
         });
     }

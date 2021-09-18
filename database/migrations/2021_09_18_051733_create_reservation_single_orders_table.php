@@ -22,7 +22,6 @@ class CreateReservationSingleOrdersTable extends Migration
             $table->string('description');
             $table->integer('price');
             $table->string('categories');
-            $table->string('image');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->foreign('food_id')->references('id')->on('food')->onDelete('cascade');

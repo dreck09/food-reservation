@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class ReservationSingleOrder extends Model
 {
     use HasFactory;
+
+    protected $fillable=[
+        'user_id',
+        'reservation_id',
+        'food_id',
+        'food_title',
+        'description',
+        'price',
+        'categories',
+    ];
+
 }

@@ -1,29 +1,32 @@
 <?php
-
-use App\Http\Controllers\FoodController;
-use App\Http\Controllers\FoodPackageController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Models\Food;
-use App\Models\FoodPackage;
+
+use App\Http\Controllers\Auth\{
+    LoginController,
+    RegisterController
+};
+
+use App\Http\Controllers\{
+    FoodController,
+    FoodPackageController,
+    HomeController,
+    ReservationController
+};
 
 Route::get('/', function () {
     return view('homepage');
 });
-Route::get('/reservation', function () {
-    return view('reservation');
-})->name('reservation');
-Route::get('/transaction', function () {
-    return view('transaction');
-});
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/home/transaction', function () {
+
+Route::get('/transaction', function () {
     return view('transaction');
 })->name('transaction');
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation');
+    Route::post('add/reservation', [ReservationController::class, 'store'])->name('add.reservation');
+});
 
 Auth::routes();
 
