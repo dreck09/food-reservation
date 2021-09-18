@@ -42,42 +42,47 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
+                        <li class="nav-item p-1">
                             <a href="/" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-1">
                             <a href="#about" class="nav-link">About Us</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-1">
                             <a href="#contact" class="nav-link">Contact Us</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-1">
                             <a href="#services" class="nav-link">Services</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-1">
                             <a href="#services" class="nav-link">Products</a>
                         </li>
-                      
+                        <li class="nav-item p-1">
+                            <a href="{{route('reservation')}}" class="nav-link">Reservation</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
+                                <li class="nav-item p-1">
                                     <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item ml-2">
+                                <li class="nav-item p-1">
                                     <a class="btn btn-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown p-1">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
+                        
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('home')}}">
+                                        {{ __('My Account') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -227,7 +227,6 @@ select {
 }
 
 .package-card {
-    height: 200px;
     box-shadow: 4px 4px 1px 1px cadetblue;
     border: 1px solid cadetblue;
     padding: 20px;
@@ -258,5 +257,10 @@ select {
     margin: 2px;
     background-color: white;
     color: cadetblue;
+    border: 1px solid cadetblue;
+}
+
+.transaction-right {
+
     border: 1px solid cadetblue;
 }

@@ -14,7 +14,7 @@ Route::get('/', function () {
 });
 Route::get('/reservation', function () {
     return view('reservation');
-});
+})->name('reservation');
 Route::get('/transaction', function () {
     return view('transaction');
 });
@@ -22,7 +22,7 @@ Route::get('/transaction', function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home/transaction', function () {
     return view('transaction');
-});
+})->name('transaction');
 
 
 Auth::routes();
