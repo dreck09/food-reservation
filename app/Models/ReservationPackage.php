@@ -15,5 +15,11 @@ class ReservationPackage extends Model
         'food_package_id',
         'package_name',
         'price',
+        'foods',
     ];
+
+    protected $casts =[
+        'foods' => 'array',
+    ];
+    
 }

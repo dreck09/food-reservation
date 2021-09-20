@@ -26,6 +26,7 @@ Route::get('/transaction', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation');
     Route::post('add/reservation', [ReservationController::class, 'store'])->name('add.reservation');
+    Route::post('add/transaction', [ReservationController::class, 'transaction'])->name('transaction');
 });
 
 Auth::routes();

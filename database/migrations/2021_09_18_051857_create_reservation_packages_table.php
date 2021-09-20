@@ -20,6 +20,7 @@ class CreateReservationPackagesTable extends Migration
             $table->unsignedBigInteger('food_package_id');
             $table->string('package_name');
             $table->integer('price');
+            $table->json('foods');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->foreign('food_package_id')->references('id')->on('food_packages')->onDelete('cascade');

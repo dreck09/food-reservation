@@ -11,10 +11,17 @@ class Reservation extends Model
 
     protected $fillable=[
         'user_id',
+        'motif',
+        'venue',
         'guests_no',
         'r_date',
         'r_type',
         'special_req',
+        'total_payment',
+        'downpayment',
+        'gcash_name',
+        'upload_image',
+        'dp_date_time',
     ];
 
 }
