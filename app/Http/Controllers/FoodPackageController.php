@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Food;
-use App\Models\FoodPackage;
-use App\Models\AssignFoodPackage;
+use App\Models\{Food,FoodPackage,AssignFoodPackage};
 use Illuminate\Http\Request;
 
 class FoodPackageController extends Controller
@@ -20,12 +18,6 @@ class FoodPackageController extends Controller
                 $listFood->food_title = $item_food_name->food_title;
             });
         });
-        // return $package;
-        // foreach($package as $data){
-        //     foreach($data->assign_food_package as $subdata){
-        //         dd($subdata);
-        //     }
-        // }
         
         return view('admin-add-food-package',compact('package','foods'));
     }
@@ -45,7 +37,6 @@ class FoodPackageController extends Controller
                     'food_package_id' => $package->id,
                     'food_id'=>$food_data->id,
                 ]);
-                // dd($assignedFood->food_package_id);
             }
         }
         return back()->with('message', 'Successfully Added!');

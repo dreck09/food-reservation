@@ -5,9 +5,17 @@
     @csrf
     <div class="container">
         <div class="card mt-5">
-        <h3 class="text-center card-header">Reservation Form</h3>
+        <h3 class="card-header">Reservation Form</h3>
         <div class="outer-form-container">
             <div class="form-container card-body mx-auto">
+                <p>
+                    <label for="venue">Venue</label>
+                    <textarea class="form-control p-2" id="venue" name="venue" type="text" placeholder="Enter Venue" required=""></textarea>
+                </p>
+                <p>
+                    <label for="motif">Motif</label>
+                    <input class="form-control p-2" id="motif" name="motif" type="text" placeholder="Enter Motif" required=""/>
+                </p>
                 <p>
                     <label for="guest">Number of Guest</label>
                     <input class="form-control p-2" id="guest" name="guest" type="number" placeholder="Enter Number of Guests" required=""/>
@@ -43,8 +51,7 @@
                     <div class="col-xl-4 col-md-6  col-sm-6 col-12">
                         <div class="package-card card">
                             <div class="title">
-                                <!--The value must be id of package-->
-                                <h4><input type="radio" name="package" value="$pkg->id"> {{$pkg->package_name . " - " . $pkg->price}} pesos</h4>
+                                <h5><input type="radio" required name="package" value="{{$pkg->id}}"> {{$pkg->package_name . " - " . $pkg->price}} pesos</h5>
                             </div>
                             <div class="card-body" style="display: block;">
                                 <table class="table table-striped table-bordered">
@@ -58,91 +65,13 @@
                                 </table> 
                             </div>
                         </div>
-                    </div><!--end -->
+                    </div>
                 @endforeach
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="card mt-3 pb-4">
-    <div class="single-order-container">
-        <h3 class="card-header">Choose Single Order <span style="font-size:15px;">(--Optional--)</span></h3>
-
-        <h4 class="text-center card-header mt-3" style="font-style: italic;">Course Menu - <button class="btn .btn-sm" type="button" data-toggle="collapse" data-target="#collapseCourse" aria-expanded="false" aria-controls="collapseCourse">
-           ( Show / Hide ) 
-        </button></h4>
-        <div class="course-menu">
-            <div class="container">
-            <div class="collapse" id="collapseCourse">
-            <div class="card card-body">
-                <div class="row">
-                    @forelse($foods_main as $data)
-                    <div class="col-xl-4 col-md-4 col-sm-6 col-12">
-                        <div class="course-mune-inner">
-                            <p><input type="checkbox"> {{$data->food_title}} - <b>₱{{$data->price}}</b></p>
-                            <img src="/storage/foods_image/{{$data->image}}" alt="" >
-                        </div>
-                    </div>
-                    @empty
-                    <p><h5>No records found!</h5></p>
-                    @endforelse
-                </div>
-            </div>
-            </div>
-            </div>
-        </div>
-
-        <h4 class="text-center card-header mt-3" style="font-style: italic;">Desert Menu - <button class="btn .btn-sm" type="button" data-toggle="collapse" data-target="#collapseDesert" aria-expanded="false" aria-controls="collapseDesert">
-           ( Show / Hide ) 
-        </button></h4>
-        <div class="course-menu">
-            <div class="container">
-            <div class="collapse" id="collapseDesert">
-            <div class="card card-body">
-                <div class="row">
-                    @forelse($foods_desert as $data)
-                    <div class="col-xl-4 col-md-4 col-sm-6 col-12">
-                        <div class="course-mune-inner">
-                            <p><input type="checkbox"> {{$data->food_title}} - <b>₱{{$data->price}}</b></p>
-                            <img src="{{url('/images/food2.jpeg')}}" alt="" >
-                        </div>
-                    </div>
-                    @empty
-                    <h5>No records found!</h5>
-                    @endforelse
-                </div>
-            </div>
-            </div>
-            </div>
-        </div>
-
-        <h4 class="text-center card-header mt-3" style="font-style: italic;">Drinks Menu - <button class="btn .btn-sm" type="button" data-toggle="collapse" data-target="#collapseDrinks" aria-expanded="false" aria-controls="collapseDrinks">
-           ( Show / Hide ) 
-        </button></h4>
-        <div class="course-menu">
-            <div class="container">
-            <div class="collapse" id="collapseDrinks">
-            <div class="card card-body">
-                <div class="row">
-                    @forelse($foods_drinks as $data)
-                    <div class="col-xl-4 col-md-4 col-sm-6 col-12">
-                        <div class="course-mune-inner">
-                            <p><input type="checkbox"> {{$data->food_title}} - <b>₱{{$data->price}}</b></p>
-                            <img src="{{url('/images/food2.jpeg')}}" alt="" >
-                        </div>
-                    </div>
-                    @empty
-                    <h5>No records found!</h5>
-                    @endforelse
-                </div>
-            </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
     <div class="button-container">
         <input type="submit" class="rounded mb-5 btn-lg" name="" id="" value="Next">
     </div>
