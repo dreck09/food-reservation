@@ -27,6 +27,7 @@ class CreateReservationsTable extends Migration
             $table->string('gcash_name');
             $table->string('upload_image');
             $table->dateTime('dp_date_time');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

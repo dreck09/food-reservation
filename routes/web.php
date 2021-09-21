@@ -51,9 +51,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::delete('list/food/{id}', [FoodController::class, 'destroy'])->name('delete.food');
         Route::put('update/food', [FoodController::class, 'update'])->name('update.food');
         //trasaction
-        Route::get('pending/transaction/list', function(){
-            return view('admin-pending-transaction');
-        })->name('pending.transaction');
+        Route::get('pending/transaction', [ReservationController::class, 'pendingList'])->name('pending.transaction');
         Route::get('inprocess/transaction/list', function(){
             return view('admin-inprocess-transaction');
         })->name('inprocess.transaction');

@@ -15,7 +15,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -43,22 +44,22 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item p-1">
-                            <a href="/" class="nav-link">Home</a>
+                            <a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a>
                         </li>
                         <li class="nav-item p-1">
-                            <a href="#about" class="nav-link">About Us</a>
+                            <a href="#about" class="nav-link"><i class="fas fa-address-card"></i> About Us</a>
                         </li>
                         <li class="nav-item p-1">
-                            <a href="#contact" class="nav-link">Contact Us</a>
+                            <a href="#contact" class="nav-link"><i class="fas fa-paper-plane"></i> Contact Us</a>
                         </li>
                         <li class="nav-item p-1">
-                            <a href="#services" class="nav-link">Services</a>
+                            <a href="#services" class="nav-link"><i class="fas fa-utensils"></i> Services</a>
                         </li>
                         <li class="nav-item p-1">
-                            <a href="#services" class="nav-link">Products</a>
+                            <a href="#services" class="nav-link"><i class="fas fa-drumstick-bite"></i> Products</a>
                         </li>
                         <li class="nav-item p-1">
-                            <a href="{{route('reservation')}}" class="nav-link">Reservation</a>
+                            <a href="{{route('reservation')}}" class="nav-link"><i class="fas fa-calendar-check"></i> Reservation</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -76,7 +77,7 @@
                         @else
                             <li class="nav-item dropdown p-1">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                <i class="fas fa-user"></i> {{ Auth::user()->name }}
                                 </a>
                         
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
