@@ -22,6 +22,7 @@ class Reservation extends Model
         'gcash_name',
         'upload_image',
         'dp_date_time',
+        'status',
     ];
 
 }

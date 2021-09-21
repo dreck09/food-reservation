@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\{Reservation,FoodPackage,Food,ReservationPackage};
+use App\Models\{Reservation,FoodPackage,Food,ReservationPackage,User};
 
 class ReservationController extends Controller
 {
-
+    
     public function index()
     {
-        $foods_main = Food::where('categories' , 'Main Dish')->get();
-        $foods_desert = Food::where('categories' , 'Desert')->get();
-        $foods_drinks = Food::where('categories' , 'Beverage')->get();
-        $foods = Food::get();
-        $foods = Food::get();
         $package = FoodPackage::get();
         $package->map(function ($item){
             $assign_food_package = $item->assign_food_package;
@@ -22,7 +17,7 @@ class ReservationController extends Controller
                 $listFood->food_title = $item_food_name->food_title;
             });
         });
-        return view('reservation',compact('package','foods','foods_main','foods_desert','foods_drinks'));
+        return view('reservation',compact('package'));
     }
 
     public function store(Request $request)
@@ -114,5 +109,15 @@ class ReservationController extends Controller
 
         }
 
+    }
+
+    public function pendingList()
+    {
+        $pending_list = Reservation::where('status', 'pending')->get();
+        $pending_list->map(function ($item){
+            $user_name = User::findorfail($item->user_id);
+            $item->name = $user_name->name;
+        });
+        return view('admin-pending-transaction',compact('pending_list'));
     }
 }
