@@ -24,5 +24,9 @@ class Reservation extends Model
         'dp_date_time',
         'status',
     ];
+    public function reservation_package()
+    {
+        return $this->hasMany(ReservationPackage::class);
+    }
 
 }
