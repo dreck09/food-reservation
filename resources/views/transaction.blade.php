@@ -5,6 +5,14 @@
     <div class="row">
         <div class="col-xl-6 col-md-6 col-sm-12 col-12 transaction-right card mt-4 p-4">
             <h2 class="p-3 text-center">Transaction Payment</h2>
+            @if(session('message'))
+            <div class="alert alert-success alert-dismissible">
+                {{ session('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             <form action="{{route('transaction')}}" method="post" enctype="multipart/form-data">
             @csrf
                 @foreach($reservation as $data)
@@ -26,11 +34,11 @@
                 @foreach($food_array as $food)
                 <input type="checkbox" checked class="form-control" name="foods[]" hidden value="{{$food}}">
                 @endforeach
-                <p><label for="">Half Payment: </label> <input type="text" class="form-control" name="h_payment" id="" placeholder="Enter Half Payment">
+                <p><label for="">Half Payment: </label> <input type="text" class="form-control" name="h_payment" id="" required placeholder="Enter Half Payment">
                 <a class="text-info">Note: Your half-payment must be ₱{{$halfpayment}} or higher..</a></p>
-                <p><label for="">Your G-Cash Name: </label> <input type="text" class="form-control" name="gcash_name" id="" placeholder="Enter Half Payment"></p>
-                <p><label for="">Upload Sceenshot Reciept: </label> <input type="file" class="form-control" name="upload_receipt" id=""></p>
-                <p><label for="">Payment Date and Time: </label> <input type="date" class="form-control" name="pay_date" id=""></p>
+                <p><label for="">Your G-Cash Name: </label> <input type="text" class="form-control" name="gcash_name" id="" required placeholder="Enter Half Payment"></p>
+                <p><label for="">Upload Sceenshot Reciept: </label> <input type="file" class="form-control" required name="upload_receipt" id=""></p>
+                <p><label for="">Payment Date and Time: </label> <input type="datetime-local" class="form-control" required name="pay_date" id=""></p>
                 
                 <input class="special rounded p-2" type="submit" value="Reserve">
             </form>         

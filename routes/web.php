@@ -16,17 +16,14 @@ use App\Http\Controllers\{
 Route::get('/', function () {
     return view('homepage');
 });
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::get('/transaction', function () {
-    return view('transaction');
-})->name('transaction');
-
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation');
-    Route::post('add/reservation', [ReservationController::class, 'store'])->name('add.reservation');
-    Route::post('add/transaction', [ReservationController::class, 'transaction'])->name('transaction');
+
+    Route::prefix('client')->group(function(){
+        Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation');
+        Route::post('add/reservation', [ReservationController::class, 'store'])->name('add.reservation');
+        Route::post('add/transaction', [ReservationController::class, 'transaction'])->name('transaction');
+    });
 });
 
 Auth::routes();
@@ -52,6 +49,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::put('update/food', [FoodController::class, 'update'])->name('update.food');
         //trasaction
         Route::get('pending/transaction', [ReservationController::class, 'pendingList'])->name('pending.transaction');
+        Route::post('pending/transaction/view/{id}', [ReservationController::class, 'viewPending'])->name('view.pending');
+
         Route::get('inprocess/transaction/list', function(){
             return view('admin-inprocess-transaction');
         })->name('inprocess.transaction');
