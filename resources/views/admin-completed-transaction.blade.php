@@ -1,7 +1,21 @@
 @extends('layouts.admin')
 
 @section('content')
-
+<div class="row mb-3">
+    <div class="bulletWrap">
+        <div class="bulletTrack tableHorizontal">
+            <div class="slide tableCell">
+                <a href="{{route('pending.transaction')}}"><i class="fas fa-spinner"></i><p class="text-secondary">Pending</p></a>
+            </div>
+            <div class="slide tableCell">
+                <a href="{{route('inprocess.transaction')}}"><i class="fas fa-history"></i><p class="text-secondary">Processing</p></a>
+            </div>
+            <div class="slide tableCell">
+                <a class="active" href="{{route('completed.transaction')}}"><i class="fas fa-calendar-check"></i><p class="text-secondary">Complete</p></a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -14,7 +28,7 @@
             </div>
         @endif
         <div class="card">
-            <div class="card-header bg-primary">
+            <div class="card-header bg-success">
             <h3 class="card-title">Completed Transaction</h3>
             </div>
             <!-- /.card-header -->
@@ -33,31 +47,28 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($completed as $data)
                 <tr>
                     <td hidden=""></td>
-                    <td>311231</td>
-                    <td>Rosalinda Havier</td>
-                    <td>20,000</td>
-                    <td>10,000</td>
-                    <td>Sept 30, 2022</td>
-                    <td><span class="bg-success rounded p-1">Completed</span></td>
+                    <td>{{str_pad($data->id, 6, '0', STR_PAD_LEFT)}}</td>
+                    <td>{{$data->name}}</td>
+                    <td>{{$data->total_payment}}</td>
+                    <td>{{$data->downpayment}}</td>
+                    <td>{{Carbon\Carbon::parse($data->r_date)->format('M d, Y | H:i:s')}}</td>
+                    <td><span class="bg-success rounded p-1">Complete</span></td>
                     <td>
-                        <form>
-                        <a class="btn btn-primary m-1 .btn-sm"
-                            type="button" 
-                           
-                            class="btn btn-primary" 
-                            data-toggle="modal" 
-                            data-target="#showReservationModal">
-                            <i class="fas fa-eye"></i>
-                        </a> 
-                        <button type="submit" class="btn btn-danger m-1 .btn-sm">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        <form action="{{route('view.completed',$data->id)}}" method="post">
+                        @csrf
+                           <button class="btn btn-primary m-1 .btn-sm"
+                                type="submit"
+                                class="btn btn-primary">
+                                Show
+                                <i class="fas fa-eye"></i>
+                            </button>  
                         </form>
                     </td>
-                    
                 </tr>
+                @endforeach
                 </tbody>
             </table>
             </div>

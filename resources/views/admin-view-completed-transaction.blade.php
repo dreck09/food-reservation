@@ -9,7 +9,7 @@
                 <h5 class="card-title">Reservation Information</h5>
             </div>
             <div class="card-body">
-            @foreach($pending_list as $data)
+            @foreach($completed as $data)
                 <div class="row mb-3">
                     <h3 class="text-primary"><i class="fas fa-user"></i> {{$data->name}}</h3>
                     <div class="ml-auto">
@@ -69,21 +69,17 @@
                         <h5 class="mt-2 text-muted">Downpayment</h5>
                         <p id="trans_d_payment" hidden>{{$data->downpayment}}</p>
                         <p id="tdp"></p>
+                        <h5 class="mt-2 text-muted">Balance</h5>
+                        <p class="text-center bg-success rounded p-2">Already Paid!</p>
                         </div>
                     </div>
                 </div> 
-                <form action="{{route('approved', $data->id)}}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                    <div class="float-left mt-5 mb-3">
-                        <a href="{{route('pending.transaction')}}" class="btn btn-sm btn-danger p-3">
-                        <i class="fas fa-arrow-left"></i> Back</a>
-                    </div>
-                    <div class="float-right mt-5 mb-3">
-                        <button class="btn btn-sm btn-primary p-3" type="submit">
-                        Approved <i class="fas fa-arrow-right"></i></button>
-                    </div>  
-                </form>  
+               
+                <div class="float-left mt-5 mb-3">
+                    <a href="{{route('completed.transaction')}}" class="btn btn-sm btn-danger p-3">
+                    <i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+                
                 @endforeach  
             @endforeach    
             </div>

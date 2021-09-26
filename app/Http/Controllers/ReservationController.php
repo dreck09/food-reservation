@@ -59,7 +59,7 @@ class ReservationController extends Controller
 
     public function transaction(Request $request)
     {
-        $user = Reservation::where('status', 'pending')->where('user_id', auth()->user()->id)->get();
+        $user = Reservation::where('status', 'pending')->orWhere('status', 'approved')->where('user_id', auth()->user()->id)->get();
         if($user->isEmpty()){
             $amount_desire = $request->total / 2;
             if($amount_desire <= $request->h_payment)
@@ -172,23 +172,13 @@ class ReservationController extends Controller
             $total = $f_pack['price'] * $guest;
             $halfpayment = $total / 2;
 
-            session()->flash('message','Sorry you have pending transaction already.. Please contact the admin to verify your transaction.. Thank you!');
+            session()->flash('message','Sorry you have been transact already.. Please contact the admin to verify your transaction.. Thank you!');
             $reservation[] = array($venue, $motif, $guest, $r_date_time, $r_type, $s_req, $package_id, $package_name, $package_price, $total);
             return view('transaction',compact('reservation', 'food_array', 'halfpayment'));
 
         }
     }
-
-    public function pendingList()
-    {
-        $pending_list = Reservation::with('reservation_package')->where('status', 'pending')->get();
-        $pending_list->map(function ($item){
-            $user_name = User::findorfail($item->user_id);
-            $item->name = $user_name->name;
-        });
-        return view('admin-pending-transaction',compact('pending_list'));
-    }
-
+    
     public function viewPending($id)
     {
         $pending_list = Reservation::with('reservation_package')->where('status', 'pending')->where('id',$id)->get();
@@ -196,6 +186,70 @@ class ReservationController extends Controller
             $user_name = User::findorfail($item->user_id);
             $item->name = $user_name->name;
         });
-        return view('admin-view-pending-transaction',compact('pending_list'));
+        return view('admin-view-pending-transaction',compact('pending_list'),
+        ['metaTitle'=>'View Transaction Pending | Admin Panel',
+        'metaHeader'=>'Transaction Information']);
+    }
+
+    public function approvedReservation($id)
+    {
+        $approved_list = Reservation::findOrFail($id);
+        $approved_list->status = "approved";
+        $approved_list->update();
+        
+        $approved = Reservation::with('reservation_package')->where('status', 'approved')->get();
+        $approved->map(function ($item){
+            $user_name = User::findorfail($item->user_id);
+            $item->name = $user_name->name;
+        });
+
+        session()->flash('message','Successfully Approved!');
+
+        return view('admin-inprocess-transaction',compact('approved'),
+        ['metaTitle'=>'Sucessfully Approved Transaction | Admin Panel',
+        'metaHeader'=>'Transaction Processing']);
+    }
+
+    public function viewApproved($id)
+    {
+        $approved = Reservation::with('reservation_package')->where('status', 'approved')->where('id',$id)->get();
+        $approved->map(function ($item){
+            $user_name = User::findorfail($item->user_id);
+            $item->name = $user_name->name;
+        });
+        return view('admin-view-inprocess-transaction',compact('approved'),
+        ['metaTitle'=>'View Transaction Processing | Admin Panel',
+        'metaHeader'=>'Transaction Information']);
+    }
+
+    public function completedReservation($id) 
+    {
+        $complete_list = Reservation::findOrFail($id);
+        $complete_list->status = "complete";
+        $complete_list->update();
+
+        $completed = Reservation::with('reservation_package')->where('status', 'complete')->get();
+        $completed->map(function ($item){
+            $user_name = User::findorfail($item->user_id);
+            $item->name = $user_name->name;
+        });
+
+        session()->flash('message','Successfully Completed!');
+
+        return view('admin-completed-transaction',compact('completed'),
+        ['metaTitle'=>'Done Transaction | Admin Panel',
+        'metaHeader'=>'Transaction Completed']);
+    }
+
+    public function viewCompleted($id)
+    {
+        $completed = Reservation::with('reservation_package')->where('status', 'complete')->where('id',$id)->get();
+        $completed->map(function ($item){
+            $user_name = User::findorfail($item->user_id);
+            $item->name = $user_name->name;
+        });
+        return view('admin-view-completed-transaction',compact('completed'),
+        ['metaTitle'=>'View Transaction Completed | Admin Panel',
+        'metaHeader'=>'Transaction Information']);
     }
 }

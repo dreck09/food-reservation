@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--@yield('title')-->
-  <title>Admin Dashboard</title>
+  <title>{{$metaTitle}}</title>
 
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <!-- Google Font: Source Sans Pro -->
@@ -22,6 +22,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -61,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-      <span class="brand-text font-weight-light">BNHSLM</span>
+      <span class="brand-text font-weight-light">J4's ADMIN PANEL</span>
     </a>
 
     <!-- Sidebar -->
@@ -156,9 +158,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Admin Dashboard</h1>
+            <h1 class="m-0">{{$metaHeader}}</h1>
           </div>
-         
+          
         </div>
       </div>
     </div>
@@ -280,6 +282,21 @@ $('#editFoodPackageModal').on('show.bs.modal', function (e) {
   $('#editForm').find('[name="price"]').val(price);
 
 });
+</script>
+
+<script>
+var tdp = document.getElementById("trans_d_payment").innerHTML;
+tdp = tdp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+document.getElementById("tdp").innerHTML ='₱'+tdp;
+
+var ttp = document.getElementById("trans_t_payment").innerHTML;
+ttp = ttp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+document.getElementById("ttp").innerHTML ='₱'+ttp;
+
+var bal = document.getElementById("trans_t_payment").innerHTML - document.getElementById("trans_d_payment").innerHTML;
+bal = bal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+document.getElementById("bal").innerHTML ='₱'+bal;
+
 </script>
 
 </body>

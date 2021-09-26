@@ -7,13 +7,7 @@ use Illuminate\Support\Facades\File;
 
 class FoodController extends Controller
 {
-   
-    public function index(Request $request)
-    {
-        $foods = Food::get();
-        return view('admin-add-food',compact('foods'));
-    }
-
+    
     public function store(Request $request)
     {
         $validated = $request->validate([
