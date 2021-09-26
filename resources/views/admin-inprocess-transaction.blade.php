@@ -3,6 +3,21 @@
 @section('content')
 
 <div class="container-fluid">
+<div class="row mb-3">
+    <div class="bulletWrap">
+        <div class="bulletTrack tableHorizontal">
+            <div class="slide tableCell">
+                <a href="{{route('pending.transaction')}}"><i class="fas fa-spinner"></i><p class="text-secondary">Pending</p></a>
+            </div>
+            <div class="slide tableCell">
+                <a class="active" href="{{route('inprocess.transaction')}}"><i class="fas fa-history"></i><p class="text-secondary">Processing</p></a>
+            </div>
+            <div class="slide tableCell">
+                <a href="{{route('completed.transaction')}}"><i class="fas fa-calendar-check"></i><p class="text-secondary">Complete</p></a>
+            </div>
+        </div>
+    </div>
+</div>
   <div class="row">
     <div class="col-12">
         @if(session('message'))
@@ -33,26 +48,28 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($approved as $data)
                 <tr>
                     <td hidden=""></td>
-                    <td>311231</td>
-                    <td>Rosalinda Havier</td>
-                    <td>20,000</td>
-                    <td>10,000</td>
-                    <td>Sept 30, 2022</td>
-                    <td><span class="bg-primary rounded p-1">In Process</span></td>
+                    <td>{{str_pad($data->id, 6, '0', STR_PAD_LEFT)}}</td>
+                    <td>{{$data->name}}</td>
+                    <td>{{$data->total_payment}}</td>
+                    <td>{{$data->downpayment}}</td>
+                    <td>{{Carbon\Carbon::parse($data->r_date)->format('M d, Y | H:i:s')}}</td>
+                    <td><span class="bg-info rounded p-1">Approved</span></td>
                     <td>
-                        <a class="btn btn-primary m-1 .btn-sm"
-                            type="button" 
-                           
-                            class="btn btn-primary" 
-                            data-toggle="modal" 
-                            data-target="#showReservationModal">
-                            Show
-                            <i class="fas fa-eye"></i>
-                        </a> 
+                        <form action="{{route('view.inprocess',$data->id)}}" method="post">
+                        @csrf
+                           <button class="btn btn-primary m-1 .btn-sm"
+                                type="submit"
+                                class="btn btn-primary">
+                                Show
+                                <i class="fas fa-eye"></i>
+                            </button>  
+                        </form>
                     </td>
                 </tr>
+                @endforeach
                 </tbody>
             </table>
             </div>
@@ -63,22 +80,4 @@
   </div>
 </div>
 
-<!-- Modal SHOW FOOD -->
-<div class="modal fade" id="showReservationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-information">
-            <h5 class="modal-title" id="exampleModalLabel">Reservation Information</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-                <div class="container p-3">
-                    .....Maintenance
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container transaction-container">
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-xl-6 col-md-6 col-sm-12 col-12 transaction-right card mt-4 p-4">
             <h2 class="p-3 text-center">Transaction Payment</h2>
             @if(session('message'))

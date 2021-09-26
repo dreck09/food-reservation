@@ -7,21 +7,6 @@ use Illuminate\Http\Request;
 class FoodPackageController extends Controller
 {
 
-    public function index()
-    {
-        $foods = Food::get();
-        $package = FoodPackage::get();
-        $package->map(function ($item){
-            $assign_food_package = $item->assign_food_package;
-            $assign_food_package->map(function ($listFood){
-                $item_food_name = Food::findorfail($listFood->food_id);
-                $listFood->food_title = $item_food_name->food_title;
-            });
-        });
-        
-        return view('admin-add-food-package',compact('package','foods'));
-    }
-
     public function store(Request $request)
     {
         $validated = $request->all();
