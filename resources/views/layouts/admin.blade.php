@@ -38,15 +38,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      
       <li class="nav-item dropdown">
           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{auth()->user()->name}} <span class="caret"></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="">
+              <i class="nav-icon fas fa-user"></i> {{ __('User Profile') }}
+              </a>
               <a class="dropdown-item" href="{{ route('logout') }}"
                   onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
+                  <i class="nav-icon fas fa-sign-out-alt"></i> {{ __('Logout') }}
               </a>
 
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -84,22 +88,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{route('admin.dashboard')}}" class="nav-link">
+            <a href="{{route('admin.dashboard')}}" class="nav-link {{(request()->route()->getName()=='admin.dashboard')?'active':''}}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Dashboard</p></a>
           </li>
+
           <li class="nav-item">
-            <a href="{{route('admin.foodmenu')}}" class="nav-link">
-            <i class="fas fa-drumstick-bite"></i>
+            <a href="{{route('admin.foodmenu')}}" class="nav-link {{(request()->route()->getName()=='admin.foodmenu')?'active':''}}">
+            <i class="nav-icon fas fa-drumstick-bite"></i>
             <p>Food Menu</p></a>
           </li>
+
           <li class="nav-item">
-            <a href="{{route('admin.foodpackage')}}" class="nav-link">
-            <i class="fas fa-box-open"></i>
+            <a href="{{route('admin.foodpackage')}}" class="nav-link {{(request()->route()->getName()=='admin.foodpackage')?'active':''}}">
+            <i class="nav-icon fas fa-box-open"></i>
             <p>Set Food Package</p></a>
           </li>
+          
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{(request()->route()->getName()=='pending.transaction' || request()->route()->getName()=='inprocess.transaction' || request()->route()->getName()=='completed.transaction')?'active':''}}">
               <i class="nav-icon fas fa-edit"></i>
               <p>
               Transaction
@@ -108,27 +115,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-                <a href="{{route('pending.transaction')}}" class="nav-link">
-                <i class="fas fa-hourglass-end ml-3"></i>
+                <a href="{{route('pending.transaction')}}" class="nav-link {{(request()->route()->getName()=='pending.transaction')?'active':''}}">
+                <i class="nav-icon fas fa-hourglass-end ml-3"></i>
                 <p>Pending</p></a>
               </li>
               <li class="nav-item">
-                <a href="{{route('inprocess.transaction')}}" class="nav-link">
-                <i class="fas fa-history ml-3"></i>
+                <a href="{{route('inprocess.transaction')}}" class="nav-link {{(request()->route()->getName()=='inprocess.transaction')?'active':''}}">
+                <i class="nav-icon fas fa-history ml-3"></i>
                 <p>In Process</p></a>
               </li>
               <li class="nav-item">
-                <a href="{{route('completed.transaction')}}" class="nav-link">
-                <i class="fas fa-calendar-check ml-3"></i>
+                <a href="{{route('completed.transaction')}}" class="nav-link {{(request()->route()->getName()=='completed.transaction')?'active':''}}">
+                <i class="nav-icon fas fa-calendar-check ml-3"></i>
                 <p>Completed</p></a>
               </li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-            <i class="fas fa-calendar-alt"></i>
-            <p>Schedule Event</p></a>
+            <a href="#" class="nav-link {{(request()->route()->getName()=='business.setting')?'active':''}}">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>Setting</p>
+              <i class="fas fa-angle-left right"></i>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="{{route('business.setting')}}" class="nav-link {{(request()->route()->getName()=='business.setting')?'active':''}}">
+                <i class="nav-icon fas fa-toolbox ml-3"></i>
+                <p>Business Setting</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-calendar-alt ml-3"></i>
+                <p>Schedule Event</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users-cog ml-3"></i>
+                <p>User Management</p></a>
+              </li>
+            </ul>
           </li>
           
           <hr>
@@ -296,7 +322,51 @@ document.getElementById("ttp").innerHTML ='₱'+ttp;
 var bal = document.getElementById("trans_t_payment").innerHTML - document.getElementById("trans_d_payment").innerHTML;
 bal = bal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 document.getElementById("bal").innerHTML ='₱'+bal;
+</script>
 
+<script>
+$('#editBusinessModal').on('show.bs.modal', function (e) {
+  var opener=e.relatedTarget;
+  var id=$(opener).attr('id');
+  var btitle=$(opener).attr('btitle');
+  var cpnumber=$(opener).attr('cpnumber');
+  var email=$(opener).attr('email');
+  var address=$(opener).attr('address');
+  var image=$(opener).attr('image');
+  $('#editBusinessForm').find('[name="business_id"]').val(id);
+  $('#editBusinessForm').find('[name="btitle"]').val(btitle);
+  $('#editBusinessForm').find('[name="cpnumber"]').val(cpnumber);
+  $('#editBusinessForm').find('[name="email"]').val(email);
+  $('#editBusinessForm').find('[name="address"]').val(address);
+  $('#editBusinessForm').find('[name="image"]').val(image);
+});
+</script>
+<script>
+$('#editLinksModal').on('show.bs.modal', function (e) {
+  var opener=e.relatedTarget;
+  var id=$(opener).attr('id');
+  var fb=$(opener).attr('facebook');
+  var twit=$(opener).attr('twitter');
+  var insta=$(opener).attr('instagram');
+  var yt=$(opener).attr('youtube');
+  $('#editLinksForm').find('[name="link_id"]').val(id);
+  $('#editLinksForm').find('[name="facebook"]').val(fb);
+  $('#editLinksForm').find('[name="twitter"]').val(twit);
+  $('#editLinksForm').find('[name="instagram"]').val(insta);
+  $('#editLinksForm').find('[name="youtube"]').val(yt);
+});
+</script>
+<script>
+$('#editGcashModal').on('show.bs.modal', function (e) {
+  var opener=e.relatedTarget;
+  var id=$(opener).attr('id');
+  var gname=$(opener).attr('gname');
+  var gnumber=$(opener).attr('gnumber');
+  $('#editGcashForm').find('[name="gcash_id"]').val(id);
+  $('#editGcashForm').find('[name="gname"]').val(gname);
+  $('#editGcashForm').find('[name="gnumber"]').val(gnumber);
+
+});
 </script>
 
 </body>

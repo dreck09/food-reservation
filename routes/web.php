@@ -11,7 +11,8 @@ use App\Http\Controllers\{
     FoodPackageController,
     HomeController,
     ReservationController,
-    AdminPageController
+    AdminPageController,
+    BusinessSettingController
 };
 
 Route::get('/', function () {
@@ -36,15 +37,19 @@ Route::get('logout', [LoginController::class,'logout']);
 
 Route::group(['middleware' => 'auth:admin'], function () {
     
-    
     Route::prefix('admin')->group(function(){
-        //page control
+        //page controll
         Route::get('/',  [AdminPageController::class, 'dashboardPage'])->name('admin.dashboard');
         Route::get('list/food', [AdminPageController::class, 'foodPage'])->name('admin.foodmenu');
         Route::get('list/package', [AdminPageController::class,'foodPackagePage'])->name('admin.foodpackage');
         Route::get('pending/transaction/list', [AdminPageController::class, 'pendingList'])->name('pending.transaction');
         Route::get('inprocess/transaction/list', [AdminPageController::class, 'approvedList'])->name('inprocess.transaction');
         Route::get('completed/transaction/list', [AdminPageController::class, 'completedList'])->name('completed.transaction');
+        Route::get('setting/business', [AdminPageController::class, 'adminSetting'])->name('business.setting');
+        //setting crud
+        Route::post('setting/business/information', [BusinessSettingController::class, 'settingInformation'])->name('setting.information');
+        Route::post('setting/business/links', [BusinessSettingController::class, 'settingLinks'])->name('setting.links');
+        Route::post('setting/business/gcash', [BusinessSettingController::class, 'settingGCash'])->name('setting.gcash');
         // food package
         Route::post('add/package', [FoodPackageController::class, 'store'])->name('add.foodpackage');
         Route::put('update/package', [FoodPackageController::class, 'update'])->name('update.foodpackage');
@@ -61,6 +66,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
         //trasaction complete
         Route::put('completed/transaction/{id}', [ReservationController::class, 'completedReservation'])->name('completed');
         Route::post('completed/transaction/view/{id}', [ReservationController::class, 'viewCompleted'])->name('view.completed');
-
     });
 });
