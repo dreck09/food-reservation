@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\{Reservation,FoodPackage,Food,ReservationPackage,User};
+use App\Models\{Reservation,FoodPackage,Food,User,Business,Link,GCashInfo};
 use Illuminate\Http\Request;
 
 class AdminPageController extends Controller
@@ -85,7 +85,13 @@ class AdminPageController extends Controller
 
     public function adminSetting()
     {
-        //logo-brand , admin, name, profile pic, business name,
+        $business = Business::first();
+        $link = Link::first();
+        $gcash = GCashInfo::first();
+
+        return view('admin-business-setting',compact('business','link','gcash'),
+        ['metaTitle'=>'Business Setting Page | Admin Panel',
+        'metaHeader'=>'Business Setting']);
     }
     
 }
